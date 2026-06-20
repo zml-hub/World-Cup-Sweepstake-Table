@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>World Cup 2026 Sweepstake</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c1410; --panel:#13211a; --panel-2:#172a20;
+    --line:rgba(255,255,255,.08); --line-strong:rgba(255,255,255,.16);
+    --ink:#eaf2ec; --muted:#89a394;
+    --track:#0a120d; --gold:#f3c14b; --turf:#5fce86;
+    --disp:'Saira Condensed','Arial Narrow',system-ui,sans-serif;
+    --body:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    font-family:var(--body); color:var(--ink); line-height:1.45;
+    background:
+      repeating-linear-gradient(90deg, rgba(255,255,255,.013) 0 64px, rgba(0,0,0,0) 64px 128px),
+      radial-gradient(1100px 560px at 50% -12%, rgba(95,206,134,.07), transparent 62%),
+      var(--bg);
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh; padding:28px 18px 64px;
+  }
+  .wrap{max-width:1120px; margin:0 auto}
+
+  /* ---------- Header ---------- */
+  header.top{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:16px 24px; margin-bottom:22px}
+  .title h1{
+    font-family:var(--disp); font-weight:800; letter-spacing:.01em;
+    font-size:clamp(30px,5vw,46px); line-height:.95; margin:0; text-transform:uppercase;
+  }
+  .title h1 span{color:var(--gold)}
+  .title .admin-pill{display:none; vertical-align:middle; font-size:13px; font-weight:700; letter-spacing:.08em;
+    color:var(--gold); border:1px solid rgba(243,193,75,.5); border-radius:6px; padding:2px 7px; margin-left:10px}
+  body.admin .title .admin-pill{display:inline-block}
+  .title p{margin:6px 0 0; color:var(--muted); font-size:14px; max-width:46ch}
+  .legend{display:flex; flex-wrap:wrap; gap:6px; align-items:center; font-family:var(--disp);
+    font-size:12.5px; letter-spacing:.04em; text-transform:uppercase}
+  .legend .stage{display:inline-flex; align-items:baseline; gap:5px; background:var(--panel);
+    border:1px solid var(--line); border-radius:7px; padding:5px 8px; color:var(--muted)}
+  .legend .stage b{color:var(--ink)}
+  .legend .stage i{font-style:normal; color:var(--gold); font-weight:700}
+
+  /* ---------- Leaderboard (hero) ---------- */
+  .board{background:linear-gradient(180deg,var(--panel-2),var(--panel));
+    border:1px solid var(--line-strong); border-radius:16px; padding:16px 18px 18px; margin-bottom:26px;
+    box-shadow:0 18px 40px -28px rgba(0,0,0,.9)}
+  .board-head{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; flex-wrap:wrap}
+  .board-head h2{font-family:var(--disp); text-transform:uppercase; letter-spacing:.05em;
+    font-size:15px; color:var(--muted); margin:0; font-weight:700}
+  .admin-tools{display:flex; align-items:center; gap:12px; flex-wrap:wrap}
+  .standings{display:grid; gap:8px}
+  .stand{display:grid; grid-template-columns:30px 1fr auto; align-items:center; gap:12px;
+    padding:9px 12px; border-radius:11px; background:var(--track); border:1px solid var(--line);
+    transition:border-color .25s, background .25s}
+  .stand.lead{border-color:rgba(243,193,75,.5); background:linear-gradient(90deg,rgba(243,193,75,.10),var(--track) 55%)}
+  .stand .rank{font-family:var(--disp); font-weight:700; font-size:18px; color:var(--muted); text-align:center}
+  .stand.lead .rank{color:var(--gold)}
+  .stand .who{min-width:0}
+  .stand .name{font-family:var(--disp); font-weight:700; font-size:19px; letter-spacing:.01em;
+    display:flex; align-items:center; gap:8px}
+  .stand .dot{width:11px; height:11px; border-radius:50%; flex:none; box-shadow:0 0 0 3px rgba(255,255,255,.05)}
+  .stand .minibar{height:5px; border-radius:3px; background:rgba(255,255,255,.06); margin-top:6px; overflow:hidden}
+  .stand .minibar i{display:block; height:100%; border-radius:3px; transition:width .5s cubic-bezier(.22,1,.36,1)}
+  .stand .pts{font-family:var(--disp); font-weight:800; font-size:30px; line-height:1; text-align:right}
+  .stand .pts small{display:block; font-size:10px; letter-spacing:.14em; color:var(--muted); font-weight:600; margin-top:2px}
+  .crown{font-size:15px}
+
+  /* ---------- Player cards ---------- */
+  .grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px}
+  @media (max-width:880px){ .grid{grid-template-columns:1fr} }
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:16px; overflow:hidden}
+  .card-head{display:flex; align-items:center; justify-content:space-between; gap:12px;
+    padding:14px 16px; border-bottom:1px solid var(--line);
+    background:linear-gradient(90deg,color-mix(in srgb,var(--pc) 14%,transparent),transparent 60%)}
+  .card-head .pname{font-family:var(--disp); font-weight:800; font-size:24px; text-transform:uppercase;
+    letter-spacing:.01em; display:flex; align-items:center; gap:9px}
+  .card-head .pname .swatch{width:13px; height:13px; border-radius:4px; background:var(--pc)}
+  .card-head .ptotal{font-family:var(--disp); font-weight:800; font-size:32px; line-height:1; color:var(--pc)}
+  .card-head .ptotal small{font-family:var(--body); font-weight:600; font-size:10px; letter-spacing:.16em;
+    color:var(--muted); display:block; text-align:right; margin-top:1px}
+  .card-body{padding:8px 16px 16px}
+
+  /* axis + rows share the same column template so labels line up with tracks */
+  .axis,.team{display:grid; grid-template-columns:118px 1fr 26px 60px; align-items:center; gap:10px}
+  body:not(.admin) .axis, body:not(.admin) .team{grid-template-columns:118px 1fr 26px 0px}
+  .axis{padding:8px 0 10px; border-bottom:1px dashed var(--line); margin-bottom:6px}
+  .axis-track{position:relative; height:14px; margin:0 16px}
+  .axis-track span{position:absolute; top:0; transform:translateX(-50%); font-family:var(--disp);
+    font-size:11px; letter-spacing:.03em; color:var(--muted); white-space:nowrap}
+
+  .team{padding:7px 0}
+  .team .tname{font-family:var(--disp); font-weight:600; font-size:15.5px; letter-spacing:.01em;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .track-cell{position:relative}
+  .track{position:relative; height:13px; margin:0 16px; border-radius:7px; background:var(--track);
+    border:1px solid var(--line);
+    background-image:repeating-linear-gradient(to right,
+      rgba(255,255,255,.07) 0 1px, transparent 1px calc(100%/6));}
+  .track .fill{position:absolute; left:0; top:0; bottom:0; border-radius:7px;
+    background:linear-gradient(90deg,color-mix(in srgb,var(--pc) 55%,#000 8%),var(--pc));
+    transition:width .5s cubic-bezier(.22,1,.36,1)}
+  .track .puck{position:absolute; top:50%; width:22px; height:22px; border-radius:50%;
+    transform:translate(-50%,-50%); display:grid; place-items:center; font-size:13px;
+    background:var(--panel-2); border:2px solid var(--pc); box-shadow:0 2px 8px rgba(0,0,0,.5),0 0 0 3px color-mix(in srgb,var(--pc) 22%,transparent);
+    transition:left .5s cubic-bezier(.22,1,.36,1)}
+  .tpts{font-family:var(--disp); font-weight:700; font-size:18px; text-align:center; color:var(--ink)}
+  .tpts.zero{color:var(--muted)}
+
+  /* steppers + admin-only controls: hidden unless body.admin */
+  .stepper{display:none; gap:5px; justify-content:flex-end}
+  body.admin .stepper{display:flex}
+  .stepper button{font-family:var(--disp); font-weight:700; font-size:16px; width:26px; height:26px;
+    border-radius:7px; border:1px solid var(--line-strong); background:var(--panel-2); color:var(--ink);
+    cursor:pointer; line-height:1; display:grid; place-items:center; transition:transform .08s, background .15s, border-color .15s}
+  .stepper button:hover{background:#1e3327; border-color:var(--pc)}
+  .stepper button:active{transform:scale(.9)}
+  .stepper button:focus-visible{outline:2px solid var(--pc); outline-offset:2px}
+  .stepper button:disabled{opacity:.32; cursor:not-allowed}
+
+  .admin-only{display:none}
+  body.admin .admin-only{display:inline-flex}
+  .admin-note{display:none}
+  body.admin .admin-note{display:block; color:var(--muted); font-size:12.5px; margin-top:10px}
+  .public-note{color:var(--muted); font-size:12.5px}
+  body.admin .public-note{display:none}
+
+  /* mobile: stack the track under the name */
+  @media (max-width:520px){
+    .axis{grid-template-columns:1fr}
+    .axis .axis-spacer{display:none}
+    .team{grid-template-columns:1fr auto auto; grid-template-areas:"name pts step" "track track track"; row-gap:8px}
+    body:not(.admin) .team{grid-template-columns:1fr auto}
+    .team .tname{grid-area:name}
+    .tpts{grid-area:pts}
+    .stepper{grid-area:step}
+    .track-cell{grid-area:track}
+    .track,.axis-track{margin:0 14px}
+  }
+
+  /* ---------- buttons / footer ---------- */
+  .btn{font-family:var(--disp); font-weight:700; letter-spacing:.03em; text-transform:uppercase; font-size:13px;
+    padding:9px 14px; border-radius:9px; border:1px solid var(--line-strong); background:var(--panel);
+    color:var(--ink); cursor:pointer; transition:background .15s,border-color .15s}
+  .btn:hover{background:var(--panel-2); border-color:var(--gold)}
+  .btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px}
+  .btn.primary{background:var(--gold); color:#1c1505; border-color:var(--gold)}
+  .btn.primary:hover{background:#ffce5e}
+  footer{margin-top:30px; color:var(--muted); font-size:12px; text-align:center}
+
+  @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
+</style>
+</head>
+<body>
+
+<!-- ===========================================================
+     LIVE SCORES  (the single source of truth for the public page)
+     One row per player, in the order Adam, Ed, Joe, Max, Tom, Zak.
+     Eight numbers per player = the stage each of their teams reached:
+       0 Group Stage · 1 R32 · 2 R16 · 3 QF · 4 SF · 5 Final · 6 Winner
+     You normally never touch this by hand — admin mode writes it for
+     you when you click "Download published version".
+     =========================================================== -->
+<script type="application/json" id="published-state">
+[[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]]
+</script>
+
+<div class="wrap">
+
+  <header class="top">
+    <div class="title">
+      <h1>World Cup <span>2026</span> Sweepstake<span class="admin-pill">ADMIN</span></h1>
+      <p>Six players, eight teams each. A team scores a point every time it survives to the next round. Most points when the dust settles wins.</p>
+    </div>
+    <div class="legend" id="legend" aria-label="Scoring by stage"></div>
+  </header>
+
+  <section class="board" aria-label="Standings">
+    <div class="board-head">
+      <h2>Standings</h2>
+      <div class="admin-tools">
+        <span class="public-note">Live standings &middot; updated by the organiser.</span>
+        <button class="btn primary admin-only" id="publishBtn" title="Download an updated index.html with the current scores baked in">Download published version</button>
+        <button class="btn admin-only" id="resetBtn" title="Set every team back to the group stage">Reset</button>
+      </div>
+    </div>
+    <div class="standings" id="standings"></div>
+    <div class="admin-note" id="adminNote"></div>
+  </section>
+
+  <section class="grid" id="cards" aria-label="Players"></section>
+
+  <footer>
+    7 stages: Group&nbsp;Stage → Round&nbsp;of&nbsp;32 → Round&nbsp;of&nbsp;16 → Quarter-finals → Semi-finals → Final → Winner. One point per stage a team survives past the group.
+  </footer>
+</div>
+
+<script>
+/* ============================================================
+   You do not normally edit this script. Player names, flags and
+   colours live in PLAYERS below; the live scores live in the
+   #published-state block near the top of the file.
+
+   TWO MODES:
+   • Normal link  -> read-only public board.
+   • Add ?admin to the URL -> +/- buttons + "Download published version".
+   ============================================================ */
+
+const STAGES = [
+  { label:'Group Stage',     abbr:'GRP' },  // 0 points
+  { label:'Round of 32',     abbr:'R32' },  // 1
+  { label:'Round of 16',     abbr:'R16' },  // 2
+  { label:'Quarter-finals',  abbr:'QF'  },  // 3
+  { label:'Semi-finals',     abbr:'SF'  },  // 4
+  { label:'Final',           abbr:'FIN' },  // 5
+  { label:'Winner',          abbr:'🏆'  },  // 6
+];
+
+const PLAYERS = [
+  { name:'Adam', color:'#e8b04b', teams:[
+    ['Portugal','🇵🇹'], ['Netherlands','🇳🇱'], ['Mexico','🇲🇽'], ['Australia','🇦🇺'],
+    ["Côte d'Ivoire",'🇨🇮'], ['Scotland','🏴󠁧󠁢󠁳󠁣󠁴󠁿'], ['Uzbekistan','🇺🇿'], ['Curaçao','🇨🇼'],
+  ]},
+  { name:'Ed', color:'#3fc2b5', teams:[
+    ['Brazil','🇧🇷'], ['Croatia','🇭🇷'], ['Uruguay','🇺🇾'], ['South Korea','🇰🇷'],
+    ['Algeria','🇩🇿'], ['Sweden','🇸🇪'], ['Qatar','🇶🇦'], ['Cabo Verde','🇨🇻'],
+  ]},
+  { name:'Joe', color:'#f1715a', teams:[
+    ['Argentina','🇦🇷'], ['Germany','🇩🇪'], ['Senegal','🇸🇳'], ['Turkey','🇹🇷'],
+    ['Egypt','🇪🇬'], ['Tunisia','🇹🇳'], ['Saudi Arabia','🇸🇦'], ['New Zealand','🇳🇿'],
+  ]},
+  { name:'Max', color:'#b49bf2', teams:[
+    ['England','🏴󠁧󠁢󠁥󠁮󠁧󠁿'], ['Belgium','🇧🇪'], ['United States','🇺🇸'], ['Iran','🇮🇷'],
+    ['Canada','🇨🇦'], ['Congo DR','🇨🇩'], ['South Africa','🇿🇦'], ['Bosnia & Herz.','🇧🇦'],
+  ]},
+  { name:'Tom', color:'#ed73a8', teams:[
+    ['France','🇫🇷'], ['Colombia','🇨🇴'], ['Switzerland','🇨🇭'], ['Austria','🇦🇹'],
+    ['Norway','🇳🇴'], ['Paraguay','🇵🇾'], ['Jordan','🇯🇴'], ['Haiti','🇭🇹'],
+  ]},
+  { name:'Zak', color:'#76c957', teams:[
+    ['Spain','🇪🇸'], ['Morocco','🇲🇦'], ['Japan','🇯🇵'], ['Ecuador','🇪🇨'],
+    ['Panama','🇵🇦'], ['Czechia','🇨🇿'], ['Iraq','🇮🇶'], ['Ghana','🇬🇭'],
+  ]},
+];
+
+/* ================= engine ================= */
+const MAX = STAGES.length - 1;
+const ADMIN = new URLSearchParams(location.search).has('admin');
+const STORE_KEY = 'wc2026-sweepstake-working';
+document.body.classList.toggle('admin', ADMIN);
+
+function clamp(n){ return Math.max(0, Math.min(MAX, n|0)); }
+
+// published scores from the JSON block
+function readPublished(){
+  try{ return JSON.parse(document.getElementById('published-state').textContent); }
+  catch(e){ return null; }
+}
+
+// admin working copy persistence (admin mode only)
+let storageOK = true;
+try{ localStorage.setItem('_t','1'); localStorage.removeItem('_t'); }catch(e){ storageOK=false; }
+function loadWorking(){
+  if(!storageOK) return null;
+  try{ return JSON.parse(localStorage.getItem(STORE_KEY)); }catch(e){ return null; }
+}
+function saveWorking(){
+  if(ADMIN && storageOK){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }catch(e){} }
+}
+
+// build the live state: admin starts from its saved working copy (if any),
+// otherwise everyone uses the published scores.
+const published = readPublished() || PLAYERS.map(p=>p.teams.map(()=>0));
+const working = ADMIN ? loadWorking() : null;
+const state = PLAYERS.map((p,pi)=>p.teams.map((t,ti)=>{
+  const src = (working && working[pi] && typeof working[pi][ti]==='number') ? working[pi][ti]
+            : (published[pi] ? published[pi][ti] : 0);
+  return clamp(src||0);
+}));
+
+function playerTotal(pi){ return state[pi].reduce((a,b)=>a+b,0); }
+
+// ---------- legend ----------
+document.getElementById('legend').innerHTML =
+  STAGES.map((s,i)=>`<span class="stage"><b>${s.abbr}</b> <i>${i}</i></span>`).join('');
+
+// ---------- build cards once ----------
+const refs = [];
+(function buildCards(){
+  const root = document.getElementById('cards');
+  PLAYERS.forEach((p,pi)=>{
+    const card = document.createElement('section');
+    card.className='card'; card.style.setProperty('--pc',p.color);
+
+    const head = document.createElement('div');
+    head.className='card-head';
+    head.innerHTML =
+      `<div class="pname"><span class="swatch"></span>${p.name}</div>
+       <div class="ptotal">0<small>points</small></div>`;
+    card.appendChild(head);
+
+    const body = document.createElement('div');
+    body.className='card-body';
+
+    const axis = document.createElement('div');
+    axis.className='axis';
+    const labels = STAGES.map((s,i)=>`<span style="left:${(i/MAX)*100}%">${s.abbr}</span>`).join('');
+    axis.innerHTML =
+      `<div></div><div class="axis-track">${labels}</div><div></div><div></div>`;
+    body.appendChild(axis);
+
+    const tref = [];
+    p.teams.forEach((t,ti)=>{
+      const row = document.createElement('div');
+      row.className='team';
+      const name=t[0], flag=t[1];
+      row.innerHTML =
+        `<div class="tname" title="${name}">${name}</div>
+         <div class="track-cell"><div class="track"><div class="fill"></div><div class="puck">${flag}</div></div></div>
+         <div class="tpts">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move ${name} back a stage">–</button>
+           <button type="button" data-act="plus" aria-label="Advance ${name} a stage">+</button>
+         </div>`;
+      body.appendChild(row);
+
+      const minus = row.querySelector('[data-act="minus"]');
+      const plus  = row.querySelector('[data-act="plus"]');
+      minus.addEventListener('click', ()=>bump(pi,ti,-1));
+      plus.addEventListener('click',  ()=>bump(pi,ti, 1));
+
+      tref.push({ fill:row.querySelector('.fill'), puck:row.querySelector('.puck'),
+                  pts:row.querySelector('.tpts'), minus, plus });
+    });
+
+    card.appendChild(body);
+    root.appendChild(card);
+    refs.push({ total: head.querySelector('.ptotal'), teams: tref });
+  });
+})();
+
+// ---------- updates ----------
+function bump(pi,ti,delta){
+  const next = clamp(state[pi][ti] + delta);
+  if(next === state[pi][ti]) return;
+  state[pi][ti] = next;
+  saveWorking();
+  paintTeam(pi,ti); paintTotal(pi); paintStandings();
+}
+function paintTeam(pi,ti){
+  const stage = state[pi][ti];
+  const pct = (stage/MAX)*100;
+  const r = refs[pi].teams[ti];
+  r.fill.style.width = pct+'%';
+  r.puck.style.left  = pct+'%';
+  r.pts.textContent  = stage;
+  r.pts.classList.toggle('zero', stage===0);
+  r.minus.disabled = stage===0;
+  r.plus.disabled  = stage===MAX;
+}
+function paintTotal(pi){ refs[pi].total.firstChild.textContent = playerTotal(pi); }
+function paintStandings(){
+  const rows = PLAYERS.map((p,pi)=>({ name:p.name, color:p.color, pts:playerTotal(pi) }));
+  rows.sort((a,b)=> b.pts-a.pts || a.name.localeCompare(b.name));
+  const top = rows[0] ? rows[0].pts : 0;
+  let lastPts=null, lastRank=0;
+  document.getElementById('standings').innerHTML = rows.map((r,i)=>{
+    const rank = (r.pts===lastPts) ? lastRank : (i+1);
+    lastPts=r.pts; lastRank=rank;
+    const lead = (rank===1 && r.pts>0);
+    const w = top>0 ? (r.pts/top)*100 : 0;
+    return `<div class="stand${lead?' lead':''}">
+      <div class="rank">${rank}</div>
+      <div class="who">
+        <div class="name"><span class="dot" style="background:${r.color}"></span>${r.name}${lead?' <span class="crown">🏆</span>':''}</div>
+        <div class="minibar"><i style="width:${w}%; background:${r.color}"></i></div>
+      </div>
+      <div class="pts">${r.pts}<small>PTS</small></div>
+    </div>`;
+  }).join('');
+}
+
+// ---------- admin: publish ----------
+function publish(){
+  const clone = document.documentElement.cloneNode(true);
+  const stateEl = clone.querySelector('#published-state');
+  if(stateEl) stateEl.textContent = '\n'+JSON.stringify(state)+'\n';
+  const bodyEl = clone.querySelector('body');
+  if(bodyEl) bodyEl.classList.remove('admin');     // ship a public-by-default file
+  const html = '<!doctype html>\n' + clone.outerHTML;
+  const blob = new Blob([html], {type:'text/html;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'index.html';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 1000);
+}
+if(ADMIN){
+  document.getElementById('publishBtn').addEventListener('click', publish);
+  document.getElementById('resetBtn').addEventListener('click', ()=>{
+    if(!confirm('Set every team back to the Group Stage in your working copy?')) return;
+    state.forEach(p=>{ for(let i=0;i<p.length;i++) p[i]=0; });
+    saveWorking();
+    PLAYERS.forEach((p,pi)=>{ p.teams.forEach((t,ti)=>paintTeam(pi,ti)); paintTotal(pi); });
+    paintStandings();
+  });
+  document.getElementById('adminNote').innerHTML =
+    'Admin mode. Click <b>+</b> as teams advance, then <b>Download published version</b> and upload that file to GitHub as <b>index.html</b> to update the live page.' +
+    (storageOK ? ' Your unpublished clicks are saved in this browser.' : '');
+}
+
+// ---------- first paint ----------
+PLAYERS.forEach((p,pi)=>{ p.teams.forEach((t,ti)=>paintTeam(pi,ti)); paintTotal(pi); });
+paintStandings();
+</script>
+</body>
+</html>
