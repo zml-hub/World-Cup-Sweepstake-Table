@@ -1,12 +1,11 @@
 <!doctype html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>World Cup 2026 Sweepstake</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0c1410; --panel:#13211a; --panel-2:#172a20;
@@ -157,7 +156,7 @@
   @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
 </style>
 </head>
-<body>
+<body class="">
 
 <!-- ===========================================================
      LIVE SCORES  (the single source of truth for the public page)
@@ -168,7 +167,7 @@
      you when you click "Download published version".
      =========================================================== -->
 <script type="application/json" id="published-state">
-[[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]]
+[[0,0,1,0,0,0,0,0],[1,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,1,0,1,0,0,0],[0,0,1,0,0,0,0,0],[0,1,0,0,0,0,0,0]]
 </script>
 
 <div class="wrap">
@@ -178,23 +177,359 @@
       <h1>World Cup <span>2026</span> Sweepstake<span class="admin-pill">ADMIN</span></h1>
       <p>Six players, eight teams each. A team scores a point every time it survives to the next round. Most points when the dust settles wins.</p>
     </div>
-    <div class="legend" id="legend" aria-label="Scoring by stage"></div>
+    <div class="legend" id="legend" aria-label="Scoring by stage"><span class="stage"><b>GRP</b> <i>0</i></span><span class="stage"><b>R32</b> <i>1</i></span><span class="stage"><b>R16</b> <i>2</i></span><span class="stage"><b>QF</b> <i>3</i></span><span class="stage"><b>SF</b> <i>4</i></span><span class="stage"><b>FIN</b> <i>5</i></span><span class="stage"><b>🏆</b> <i>6</i></span></div>
   </header>
 
   <section class="board" aria-label="Standings">
     <div class="board-head">
       <h2>Standings</h2>
       <div class="admin-tools">
-        <span class="public-note">Live standings &middot; updated by the organiser.</span>
+        <span class="public-note">Live standings · updated by the organiser.</span>
         <button class="btn primary admin-only" id="publishBtn" title="Download an updated index.html with the current scores baked in">Download published version</button>
         <button class="btn admin-only" id="resetBtn" title="Set every team back to the group stage">Reset</button>
       </div>
     </div>
-    <div class="standings" id="standings"></div>
-    <div class="admin-note" id="adminNote"></div>
+    <div class="standings" id="standings"><div class="stand lead">
+      <div class="rank">1</div>
+      <div class="who">
+        <div class="name"><span class="dot" style="background:#b49bf2"></span>Max <span class="crown">🏆</span></div>
+        <div class="minibar"><i style="width:100%; background:#b49bf2"></i></div>
+      </div>
+      <div class="pts">2<small>PTS</small></div>
+    </div><div class="stand">
+      <div class="rank">2</div>
+      <div class="who">
+        <div class="name"><span class="dot" style="background:#e8b04b"></span>Adam</div>
+        <div class="minibar"><i style="width:50%; background:#e8b04b"></i></div>
+      </div>
+      <div class="pts">1<small>PTS</small></div>
+    </div><div class="stand">
+      <div class="rank">2</div>
+      <div class="who">
+        <div class="name"><span class="dot" style="background:#3fc2b5"></span>Ed</div>
+        <div class="minibar"><i style="width:50%; background:#3fc2b5"></i></div>
+      </div>
+      <div class="pts">1<small>PTS</small></div>
+    </div><div class="stand">
+      <div class="rank">2</div>
+      <div class="who">
+        <div class="name"><span class="dot" style="background:#ed73a8"></span>Tom</div>
+        <div class="minibar"><i style="width:50%; background:#ed73a8"></i></div>
+      </div>
+      <div class="pts">1<small>PTS</small></div>
+    </div><div class="stand">
+      <div class="rank">2</div>
+      <div class="who">
+        <div class="name"><span class="dot" style="background:#76c957"></span>Zak</div>
+        <div class="minibar"><i style="width:50%; background:#76c957"></i></div>
+      </div>
+      <div class="pts">1<small>PTS</small></div>
+    </div><div class="stand">
+      <div class="rank">6</div>
+      <div class="who">
+        <div class="name"><span class="dot" style="background:#f1715a"></span>Joe</div>
+        <div class="minibar"><i style="width:0%; background:#f1715a"></i></div>
+      </div>
+      <div class="pts">0<small>PTS</small></div>
+    </div></div>
+    <div class="admin-note" id="adminNote">Admin mode. Click <b>+</b> as teams advance, then <b>Download published version</b> and upload that file to GitHub as <b>index.html</b> to update the live page. Your unpublished clicks are saved in this browser.</div>
   </section>
 
-  <section class="grid" id="cards" aria-label="Players"></section>
+  <section class="grid" id="cards" aria-label="Players"><section class="card" style="--pc: #e8b04b;"><div class="card-head"><div class="pname"><span class="swatch"></span>Adam</div>
+       <div class="ptotal">1<small>points</small></div></div><div class="card-body"><div class="axis"><div></div><div class="axis-track"><span style="left:0%">GRP</span><span style="left:16.666666666666664%">R32</span><span style="left:33.33333333333333%">R16</span><span style="left:50%">QF</span><span style="left:66.66666666666666%">SF</span><span style="left:83.33333333333334%">FIN</span><span style="left:100%">🏆</span></div><div></div><div></div></div><div class="team"><div class="tname" title="Portugal">Portugal</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇵🇹</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Portugal back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Portugal a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Netherlands">Netherlands</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇳🇱</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Netherlands back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Netherlands a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Mexico">Mexico</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 16.6667%;"></div><div class="puck" style="left: 16.6667%;">🇲🇽</div></div></div>
+         <div class="tpts">1</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Mexico back a stage">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Mexico a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Australia">Australia</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇦🇺</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Australia back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Australia a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Côte d'Ivoire">Côte d'Ivoire</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇨🇮</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Côte d'Ivoire back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Côte d'Ivoire a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Scotland">Scotland</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🏴󠁧󠁢󠁳󠁣󠁴󠁿</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Scotland back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Scotland a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Uzbekistan">Uzbekistan</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇺🇿</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Uzbekistan back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Uzbekistan a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Curaçao">Curaçao</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇨🇼</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Curaçao back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Curaçao a stage">+</button>
+         </div></div></div></section><section class="card" style="--pc: #3fc2b5;"><div class="card-head"><div class="pname"><span class="swatch"></span>Ed</div>
+       <div class="ptotal">1<small>points</small></div></div><div class="card-body"><div class="axis"><div></div><div class="axis-track"><span style="left:0%">GRP</span><span style="left:16.666666666666664%">R32</span><span style="left:33.33333333333333%">R16</span><span style="left:50%">QF</span><span style="left:66.66666666666666%">SF</span><span style="left:83.33333333333334%">FIN</span><span style="left:100%">🏆</span></div><div></div><div></div></div><div class="team"><div class="tname" title="Brazil">Brazil</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 16.6667%;"></div><div class="puck" style="left: 16.6667%;">🇧🇷</div></div></div>
+         <div class="tpts">1</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Brazil back a stage">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Brazil a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Croatia">Croatia</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇭🇷</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Croatia back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Croatia a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Uruguay">Uruguay</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇺🇾</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Uruguay back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Uruguay a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="South Korea">South Korea</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇰🇷</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move South Korea back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance South Korea a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Algeria">Algeria</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇩🇿</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Algeria back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Algeria a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Sweden">Sweden</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇸🇪</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Sweden back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Sweden a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Qatar">Qatar</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇶🇦</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Qatar back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Qatar a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Cabo Verde">Cabo Verde</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇨🇻</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Cabo Verde back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Cabo Verde a stage">+</button>
+         </div></div></div></section><section class="card" style="--pc: #f1715a;"><div class="card-head"><div class="pname"><span class="swatch"></span>Joe</div>
+       <div class="ptotal">0<small>points</small></div></div><div class="card-body"><div class="axis"><div></div><div class="axis-track"><span style="left:0%">GRP</span><span style="left:16.666666666666664%">R32</span><span style="left:33.33333333333333%">R16</span><span style="left:50%">QF</span><span style="left:66.66666666666666%">SF</span><span style="left:83.33333333333334%">FIN</span><span style="left:100%">🏆</span></div><div></div><div></div></div><div class="team"><div class="tname" title="Argentina">Argentina</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇦🇷</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Argentina back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Argentina a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Germany">Germany</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇩🇪</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Germany back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Germany a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Senegal">Senegal</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇸🇳</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Senegal back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Senegal a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Turkey">Turkey</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇹🇷</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Turkey back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Turkey a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Egypt">Egypt</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇪🇬</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Egypt back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Egypt a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Tunisia">Tunisia</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇹🇳</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Tunisia back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Tunisia a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Saudi Arabia">Saudi Arabia</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇸🇦</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Saudi Arabia back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Saudi Arabia a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="New Zealand">New Zealand</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇳🇿</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move New Zealand back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance New Zealand a stage">+</button>
+         </div></div></div></section><section class="card" style="--pc: #b49bf2;"><div class="card-head"><div class="pname"><span class="swatch"></span>Max</div>
+       <div class="ptotal">2<small>points</small></div></div><div class="card-body"><div class="axis"><div></div><div class="axis-track"><span style="left:0%">GRP</span><span style="left:16.666666666666664%">R32</span><span style="left:33.33333333333333%">R16</span><span style="left:50%">QF</span><span style="left:66.66666666666666%">SF</span><span style="left:83.33333333333334%">FIN</span><span style="left:100%">🏆</span></div><div></div><div></div></div><div class="team"><div class="tname" title="England">England</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🏴󠁧󠁢󠁥󠁮󠁧󠁿</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move England back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance England a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Belgium">Belgium</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇧🇪</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Belgium back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Belgium a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="United States">United States</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 16.6667%;"></div><div class="puck" style="left: 16.6667%;">🇺🇸</div></div></div>
+         <div class="tpts">1</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move United States back a stage">–</button>
+           <button type="button" data-act="plus" aria-label="Advance United States a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Iran">Iran</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇮🇷</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Iran back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Iran a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Canada">Canada</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 16.6667%;"></div><div class="puck" style="left: 16.6667%;">🇨🇦</div></div></div>
+         <div class="tpts">1</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Canada back a stage">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Canada a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Congo DR">Congo DR</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇨🇩</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Congo DR back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Congo DR a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="South Africa">South Africa</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇿🇦</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move South Africa back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance South Africa a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Bosnia &amp; Herz.">Bosnia &amp; Herz.</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇧🇦</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Bosnia &amp; Herz. back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Bosnia &amp; Herz. a stage">+</button>
+         </div></div></div></section><section class="card" style="--pc: #ed73a8;"><div class="card-head"><div class="pname"><span class="swatch"></span>Tom</div>
+       <div class="ptotal">1<small>points</small></div></div><div class="card-body"><div class="axis"><div></div><div class="axis-track"><span style="left:0%">GRP</span><span style="left:16.666666666666664%">R32</span><span style="left:33.33333333333333%">R16</span><span style="left:50%">QF</span><span style="left:66.66666666666666%">SF</span><span style="left:83.33333333333334%">FIN</span><span style="left:100%">🏆</span></div><div></div><div></div></div><div class="team"><div class="tname" title="France">France</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇫🇷</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move France back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance France a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Colombia">Colombia</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇨🇴</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Colombia back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Colombia a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Switzerland">Switzerland</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 16.6667%;"></div><div class="puck" style="left: 16.6667%;">🇨🇭</div></div></div>
+         <div class="tpts">1</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Switzerland back a stage">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Switzerland a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Austria">Austria</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇦🇹</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Austria back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Austria a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Norway">Norway</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇳🇴</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Norway back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Norway a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Paraguay">Paraguay</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇵🇾</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Paraguay back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Paraguay a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Jordan">Jordan</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇯🇴</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Jordan back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Jordan a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Haiti">Haiti</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇭🇹</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Haiti back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Haiti a stage">+</button>
+         </div></div></div></section><section class="card" style="--pc: #76c957;"><div class="card-head"><div class="pname"><span class="swatch"></span>Zak</div>
+       <div class="ptotal">1<small>points</small></div></div><div class="card-body"><div class="axis"><div></div><div class="axis-track"><span style="left:0%">GRP</span><span style="left:16.666666666666664%">R32</span><span style="left:33.33333333333333%">R16</span><span style="left:50%">QF</span><span style="left:66.66666666666666%">SF</span><span style="left:83.33333333333334%">FIN</span><span style="left:100%">🏆</span></div><div></div><div></div></div><div class="team"><div class="tname" title="Spain">Spain</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇪🇸</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Spain back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Spain a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Morocco">Morocco</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 16.6667%;"></div><div class="puck" style="left: 16.6667%;">🇲🇦</div></div></div>
+         <div class="tpts">1</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Morocco back a stage">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Morocco a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Japan">Japan</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇯🇵</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Japan back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Japan a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Ecuador">Ecuador</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇪🇨</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Ecuador back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Ecuador a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Panama">Panama</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇵🇦</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Panama back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Panama a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Czechia">Czechia</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇨🇿</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Czechia back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Czechia a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Iraq">Iraq</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇮🇶</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Iraq back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Iraq a stage">+</button>
+         </div></div><div class="team"><div class="tname" title="Ghana">Ghana</div>
+         <div class="track-cell"><div class="track"><div class="fill" style="width: 0%;"></div><div class="puck" style="left: 0%;">🇬🇭</div></div></div>
+         <div class="tpts zero">0</div>
+         <div class="stepper">
+           <button type="button" data-act="minus" aria-label="Move Ghana back a stage" disabled="">–</button>
+           <button type="button" data-act="plus" aria-label="Advance Ghana a stage">+</button>
+         </div></div></div></section></section>
 
   <footer>
     7 stages: Group&nbsp;Stage → Round&nbsp;of&nbsp;32 → Round&nbsp;of&nbsp;16 → Quarter-finals → Semi-finals → Final → Winner. One point per stage a team survives past the group.
@@ -419,5 +754,6 @@ if(ADMIN){
 PLAYERS.forEach((p,pi)=>{ p.teams.forEach((t,ti)=>paintTeam(pi,ti)); paintTotal(pi); });
 paintStandings();
 </script>
-</body>
-</html>
+
+
+</body></html>
