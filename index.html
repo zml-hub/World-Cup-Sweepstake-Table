@@ -1,12 +1,11 @@
 <!doctype html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>World Cup 2026 Sweepstake</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#0c1410; --panel:#13211a; --panel-2:#172a20;
@@ -157,7 +156,7 @@
   @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
 </style>
 </head>
-<body>
+<body class="">
 
 <!-- ===========================================================
      LIVE SCORES  (the single source of truth for the public page)
@@ -168,7 +167,7 @@
      you when you click "Download published version".
      =========================================================== -->
 <script type="application/json" id="published-state">
-[[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0]]
+[[1,1,1,1,1,0,0,0],[1,1,0,0,1,1,0,1],[1,1,1,0,1,0,0,0],[1,1,1,0,1,1,1,1],[1,1,1,1,1,1,0,0],[1,1,1,1,0,0,0,1]]
 </script>
 
 <div class="wrap">
@@ -185,7 +184,7 @@
     <div class="board-head">
       <h2>Standings</h2>
       <div class="admin-tools">
-        <span class="public-note">Live standings &middot; updated by the organiser.</span>
+        <span class="public-note">Live standings · updated by the organiser.</span>
         <button class="btn primary admin-only" id="publishBtn" title="Download an updated index.html with the current scores baked in">Download published version</button>
         <button class="btn admin-only" id="resetBtn" title="Set every team back to the group stage">Reset</button>
       </div>
@@ -424,5 +423,6 @@ if(ADMIN){
 PLAYERS.forEach((p,pi)=>{ p.teams.forEach((t,ti)=>paintTeam(pi,ti)); paintTotal(pi); });
 paintStandings();
 </script>
-</body>
-</html>
+
+
+</body></html>
